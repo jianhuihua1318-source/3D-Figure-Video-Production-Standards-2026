@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>真人转3D手办 | 幻境手办·灵境新生 | 自适应规范表</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body {
+            background: linear-gradient(145deg, #eef2f8 0%, #e2e8f0 100%);
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            padding: clamp(16px, 4vw, 32px) clamp(16px, 5vw, 28px);
+            min-height: 100vh;
+        }
+        .master-container { max-width: 1400px; margin: 0 auto; width: 100%; }
+        .demo-hero {
+            background: linear-gradient(135deg, #1e2f4b 0%, #0f1a2c 100%);
+            border-radius: clamp(1.2rem, 5vw, 2rem);
+            padding: clamp(1rem, 4vw, 1.6rem) clamp(1.2rem, 5vw, 2rem);
+            margin-bottom: clamp(1rem, 4vw, 2rem);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 12px 24px -10px rgba(0,0,0,0.2);
+        }
+        .demo-title-box h2 {
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.2rem;
+        }
+        .demo-title-box p {
+            color: #cbd5e6;
+            font-size: clamp(0.7rem, 3vw, 0.85rem);
+            font-weight: 500;
+        }
+        .demo-badge-modern {
+            background: rgba(255,140,66,0.9);
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: clamp(0.75rem, 3vw, 0.9rem);
+            color: white;
+            white-space: nowrap;
+        }
+        .public-note {
+            background: #fff9e8;
+            border-radius: 1rem;
+            padding: 0.7rem 1rem;
+            margin-bottom: 1.2rem;
+            font-size: clamp(0.7rem, 3.5vw, 0.8rem);
+            color: #b45309;
+            border-left: 4px solid #ff8c42;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .total-time-control {
+            background: #ff8c42;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .total-time-control input {
+            width: 55px;
+            background: white;
+            border: none;
+            border-radius: 30px;
+            padding: 4px 8px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.85rem;
+            font-family: monospace;
+            outline: none;
+            color: #1e2f4b;
+        }
+        .info-strip {
+            background: white;
+            border-radius: clamp(1rem, 4vw, 1.5rem);
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.5rem;
+            font-size: clamp(0.7rem, 3.2vw, 0.85rem);
+            font-weight: 500;
+            border: 1px solid #eef2f8;
+        }
+        .info-item { display: flex; align-items: center; gap: 6px; color: #1f3a4b; }
+        .toolbar-design {
+            display: flex;
+            justify-content: flex-end;
+            gap: clamp(0.6rem, 3vw, 1rem);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .btn-design {
+            background: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 48px;
+            font-weight: 600;
+            font-size: clamp(0.75rem, 3vw, 0.85rem);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+        }
+        .btn-primary-design { background: #1e2f4b; color: white; border: 1px solid #2c405e; }
+        .btn-save-design { background: #2c7a4d; color: white; border: 1px solid #1e5a3a; }
+        .btn-secondary-design { background: #f8fafc; border: 1px solid #cbd5e1; color: #1e2a3e; }
+        .scenes-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+        .scene-card {
+            background: white;
+            border-radius: clamp(1rem, 5vw, 2rem);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            overflow: hidden;
+            border: 1px solid #edf2f9;
+        }
+        .scene-header {
+            background: #fafcff;
+            padding: clamp(0.8rem, 3.5vw, 1rem) clamp(1rem, 4vw, 1.8rem);
+            border-bottom: 2px solid #ff8c42;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .scene-title { font-size: clamp(1.1rem, 4.5vw, 1.35rem); font-weight: 700; color: #1e2f4b; }
+        .scene-duration {
+            background: #f1f5f9;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: clamp(0.65rem, 2.8vw, 0.75rem);
+            font-weight: 600;
+            color: #2c3e66;
+        }
+        .scene-body {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding: clamp(1rem, 4vw, 1.5rem) clamp(1rem, 4vw, 1.8rem);
+            gap: 1.2rem;
+        }
+        .desc-area { flex: 2.5; min-width: 220px; }
+        .img-area {
+            flex: 1;
+            min-width: 200px;
+            background: #fefaf5;
+            border-radius: 1.2rem;
+            padding: clamp(0.8rem, 3vw, 1rem);
+            text-align: center;
+            border: 1px solid #f0e4d0;
+        }
+        .single-preview {
+            background: #ffffff;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .single-preview img {
+            width: 100%;
+            max-height: 160px;
+            object-fit: contain;
+            background: #fef5ea;
+            cursor: pointer;
+            display: block;
+        }
+        .img-label {
+            font-size: clamp(0.6rem, 2.8vw, 0.7rem);
+            font-weight: 500;
+            color: #b45f06;
+            background: #fff0df;
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+        }
+        .img-actions-single {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+        .mini-btn-design {
+            background: #eff3f8;
+            border: none;
+            border-radius: 30px;
+            padding: 4px 10px;
+            font-size: clamp(0.6rem, 2.8vw, 0.7rem);
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .mini-btn-design.danger { background: #ffe6e3; color: #b91c1c; }
+        .desc-block {
+            background: #fefcf8;
+            border-radius: 1rem;
+            padding: 0.7rem;
+            margin-bottom: 0.7rem;
+            border-left: 4px solid #ff8c42;
+        }
+        .desc-label {
+            font-weight: 700;
+            font-size: clamp(0.65rem, 3vw, 0.75rem);
+            text-transform: uppercase;
+            color: #ff8c42;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        [contenteditable="true"] {
+            background: transparent;
+            border-radius: 10px;
+            padding: 4px 6px;
+            transition: 0.1s;
+            border: 1px dashed transparent;
+            outline: none;
+            font-size: clamp(0.75rem, 3.2vw, 0.85rem);
+            line-height: 1.4;
+            color: #1e2a3e;
+            word-break: break-word;
+        }
+        [contenteditable="true"]:hover { background-color: #fef9e6; border-color: #ffe0b5; }
+        [contenteditable="true"]:focus { border-color: #ffb347; background-color: #fffdf7; border-style: solid; }
+        .badge-sm {
+            background: #fef3c7;
+            color: #b45309;
+            font-size: clamp(0.6rem, 2.8vw, 0.7rem);
+            border-radius: 20px;
+            padding: 2px 8px;
+            display: inline-block;
+            margin-top: 6px;
+        }
+        .gender-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 60px;
+            width: fit-content;
+        }
+        .gender-option {
+            padding: 6px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            background: white;
+            color: #1e2f4b;
+            border: 1px solid #cbd5e1;
+        }
+        .gender-option.active { background: #ff8c42; color: white; border-color: #ff8c42; }
+        .gender-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+            border: 1px solid #f0e7dc;
+            overflow: hidden;
+        }
+        .gender-header {
+            background: #fff7ef;
+            padding: 0.7rem 1rem;
+            font-weight: 700;
+            font-size: clamp(0.95rem, 4vw, 1.1rem);
+            border-bottom: 2px solid #ffaa66;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .gender-compare-body { padding: 1rem; display: flex; flex-direction: column; gap: 0.9rem; }
+        .compare-row-dual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0e7df;
+            padding-bottom: 0.9rem;
+        }
+        .compare-item { flex: 1; min-width: 140px; }
+        .single-img-mini {
+            background: #fef9f0;
+            border-radius: 1rem;
+            padding: 0.6rem;
+            text-align: center;
+        }
+        .single-img-mini img {
+            width: 100%;
+            max-height: 110px;
+            object-fit: contain;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: clamp(0.6rem, 2.8vw, 0.7rem);
+            color: #5b6e8c;
+            padding: 0.8rem;
+        }
+        @media (max-width: 680px) {
+            .scene-body { flex-direction: column; }
+            .img-area { width: 100%; }
+            .compare-row-dual { flex-direction: column; }
+            .toolbar-design { justify-content: center; }
+            .demo-hero { flex-direction: column; text-align: center; }
+            .gender-selector { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="master-container">
+    <div class="demo-hero">
+        <div class="demo-title-box">
+            <h2>✨ 幻境手办 · 灵境新生</h2>
+            <p>真人转3D手办 | Q版卡通风格 | 服装完全差异化 | 帅哥/美女二选一 | 随时保存</p>
+        </div>
+        <div class="demo-badge-modern">⚡ 15秒内 | 随时编辑保存</div>
+    </div>
+
+    <div class="public-note">
+        <span>✏️ <strong>公开协作规范表</strong> — 双击文字修改，点击图片替换本地图片，所有修改可随时保存</span>
+        <div class="total-time-control">
+            ⏱️ 总时长 ≤ <input type="number" id="totalTimeInput" value="15" min="1" max="30" step="0.5"> 秒
+        </div>
+    </div>
+
+    <div class="info-strip">
+        <div class="info-item">📌 Demo：幻境手办 · 灵境新生</div>
+        <div class="info-item">🎯 手办服装≠真人服装 | Q版1:2.8</div>
+        <div class="info-item">👫 帅哥/美女 二选一</div>
+        <div class="info-item">💾 点击「保存当前版本」保存编辑内容</div>
+    </div>
+
+    <div class="toolbar-design">
+        <button class="btn-design btn-secondary-design" id="resetAllBtn">🔄 重置所有内容</button>
+        <button class="btn-design btn-save-design" id="saveVersionBtn">💾 保存当前版本</button>
+        <button class="btn-design btn-primary-design" id="exportHtmlBtn">📎 下载HTML文件</button>
+    </div>
+
+    <div class="scenes-grid">
+        <!-- 场景1 -->
+        <div class="scene-card">
+            <div class="scene-header">
+                <span class="scene-title">🎬 场景1 · 现世觉醒</span>
+                <div class="scene-duration">⏱️ 真人真实环境</div>
+            </div>
+            <div class="scene-body">
+                <div class="desc-area">
+                    <div class="desc-block"><div class="desc-label">📖 剧情 & 故事</div><div contenteditable="true" id="story1">主角翻阅发光手办图鉴，光芒闪耀，眼神流露对幻想世界的渴望。</div></div>
+                    <div class="desc-block"><div class="desc-label">🏞️ 场景画面</div><div contenteditable="true" id="sceneDesc1">简约工作室，暖阳透窗，真人正面半身，真实纹理，自然光感。</div></div>
+                    <div class="desc-block"><div class="desc-label">👤 人物描述</div><div contenteditable="true" id="char1">真人「主角」：休闲服装，正面自然神态，真实皮肤质感。</div></div>
+                    <div class="desc-block"><div class="desc-label">🎥 运镜 & 转场</div><div contenteditable="true" id="camTrans1">中景→推进至面部特写。转场：魔法粒子消散，白光溶解至卡通世界。</div></div>
+                    <div class="badge-sm">✔️ 真人服装写实 | 与手办完全不同</div>
+                </div>
+                <div class="img-area">
+                    <div class="img-card-single">
+                        <div class="single-preview"><img id="scene1Img" src="https://picsum.photos/id/26/500/300" alt="真人场景示意"></div>
+                        <div class="img-actions-single"><button class="mini-btn-design" id="replaceImg1Btn">📁 本地图片替换</button><button class="mini-btn-design danger" id="resetImg1Btn">重置默认</button></div>
+                        <div class="img-label">📸 真人场景示意图</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 场景2 -->
+        <div class="scene-card">
+            <div class="scene-header">
+                <span class="scene-title">🌈 场景2 · 幻境新生</span>
+                <div class="scene-duration">⏱️ Q版手办世界</div>
+            </div>
+            <div class="scene-body">
+                <div class="desc-area">
+                    <div class="desc-block"><div class="desc-label">✨ 剧情 & 故事</div><div contenteditable="true" id="story2">主角化为Q版手办「灵境使者」，身穿奇幻星辰礼服，在魔法城堡前华丽亮相。</div></div>
+                    <div class="desc-block"><div class="desc-label">🍭 场景画面</div><div contenteditable="true" id="sceneDesc2">梦幻糖果小镇+魔法城堡，色彩饱和，卡通渲染风格。</div></div>
+                    <div class="desc-block"><div class="desc-label">🎎 人物描述(手办)</div><div contenteditable="true" id="char2">Q版手办头身比1:2.8，保留真人神韵，奇幻星辰礼服+披风，与真人服装完全不同。</div></div>
+                    <div class="desc-block"><div class="desc-label">🎥 运镜 & 转场</div><div contenteditable="true" id="camTrans2">低机位仰拍→360°环绕展示服装→正面特写定格。</div></div>
+                    <div class="badge-sm">🧥 手办服装：星辰礼服 | 完全不同于真人</div>
+                </div>
+                <div class="img-area">
+                    <div class="img-card-single">
+                        <div class="single-preview"><img id="scene2Img" src="https://picsum.photos/id/96/500/300" alt="3D手办场景示意"></div>
+                        <div class="img-actions-single"><button class="mini-btn-design" id="replaceImg2Btn">📁 本地图片替换</button><button class="mini-btn-design danger" id="resetImg2Btn">重置默认</button></div>
+                        <div class="img-label">🎨 手办场景示意图</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 帅哥/美女 二选一 -->
+        <div>
+            <div class="gender-selector">
+                <div class="gender-option active" data-gender="male">👦 帅哥版 · 「逸风」</div>
+                <div class="gender-option" data-gender="female">👩 美女版 · 「星瑶」</div>
+            </div>
+            <div id="genderCardContainer"></div>
+        </div>
+    </div>
+
+    <div class="info-strip" style="margin-top: 1rem; justify-content: center;">
+        <div class="info-item">✅ 当前选择: <strong id="currentGenderText">帅哥版</strong></div>
+        <div class="info-item">💾 点击「保存当前版本」下载HTML文件，上传至Netlify/GitHub即可获得公网链接</div>
+    </div>
+    <footer>🖼️ 双击文字编辑 · 点击图片从本地替换 · 帅哥/美女二选一 · 点击保存后上传到Netlify即可让任何人打开</footer>
+</div>
+
+<script>
+    const maleData = {
+        title: '👦 帅哥专区 · 「逸风」',
+        realDesc: '黑色休闲夹克+白T，街头自信微笑，简约潮流服装。',
+        figureDesc: '星辰铠甲+魔法披风，保留帅气五官，服装奇幻华丽。',
+        cameraDesc: '低角度仰拍+环绕展示，粒子特效转场变身手办。',
+        realImg: 'https://picsum.photos/id/91/400/240',
+        figureImg: 'https://picsum.photos/id/78/400/240'
+    };
+    const femaleData = {
+        title: '👩 美女专区 · 「星瑶」',
+        realDesc: '浅色针织衫+高腰半裙，温柔甜美，简约优雅服装。',
+        figureDesc: '星月洛丽塔裙+幻光配饰，保留五官神韵，梦幻华丽。',
+        cameraDesc: '中景前推→魔法光效溶解转场，环绕展示洛丽塔细节。',
+        realImg: 'https://picsum.photos/id/20/400/240',
+        figureImg: 'https://picsum.photos/id/30/400/240'
+    };
+
+    let currentGender = 'male';
+
+    function replaceWithLocalFile(imgElement) {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (ev) => imgElement.src = ev.target.result;
+                reader.readAsDataURL(file);
+            }
+        };
+        input.click();
+    }
+
+    function bindLocalReplace(img) { img.addEventListener('click', () => replaceWithLocalFile(img)); }
+
+    function renderGenderCard() {
+        const data = currentGender === 'male' ? maleData : femaleData;
+        const prefix = currentGender === 'male' ? 'male' : 'female';
+        const container = document.getElementById('genderCardContainer');
+        container.innerHTML = `
+            <div class="gender-card">
+                <div class="gender-header"><span>${data.title}</span><div class="scene-duration" style="background:#ffe6cc;">⏱️ 角色对比展示</div></div>
+                <div class="gender-compare-body">
+                    <div class="compare-row-dual">
+                        <div class="compare-item">
+                            <div class="desc-label">📸 真人形象</div>
+                            <div contenteditable="true" id="${prefix}RealDesc">${data.realDesc}</div>
+                            <div class="single-img-mini"><img id="${prefix}RealImg" src="${data.realImg}"><div class="img-actions-single"><button class="mini-btn-design" id="replace${prefix === 'male' ? 'MaleReal' : 'FemaleReal'}Btn">📁 替换</button><button class="mini-btn-design danger" id="reset${prefix === 'male' ? 'MaleReal' : 'FemaleReal'}Btn">重置</button></div></div>
+                        </div>
+                        <div class="compare-item">
+                            <div class="desc-label">🎎 Q版手办</div>
+                            <div contenteditable="true" id="${prefix}FigureDesc">${data.figureDesc}</div>
+                            <div class="single-img-mini"><img id="${prefix}FigureImg" src="${data.figureImg}"><div class="img-actions-single"><button class="mini-btn-design" id="replace${prefix === 'male' ? 'MaleFigure' : 'FemaleFigure'}Btn">📁 替换</button><button class="mini-btn-design danger" id="reset${prefix === 'male' ? 'MaleFigure' : 'FemaleFigure'}Btn">重置</button></div></div>
+                        </div>
+                    </div>
+                    <div class="desc-block"><div class="desc-label">🎥 运镜/转场</div><div contenteditable="true" id="${prefix}Camera">${data.cameraDesc}</div></div>
+                </div>
+            </div>
+        `;
+        const realImg = document.getElementById(`${prefix}RealImg`);
+        const figureImg = document.getElementById(`${prefix}FigureImg`);
+        if (realImg) bindLocalReplace(realImg);
+        if (figureImg) bindLocalReplace(figureImg);
+        const replaceReal = document.getElementById(`replace${prefix === 'male' ? 'MaleReal' : 'FemaleReal'}Btn`);
+        const replaceFigure = document.getElementById(`replace${prefix === 'male' ? 'MaleFigure' : 'FemaleFigure'}Btn`);
+        const resetReal = document.getElementById(`reset${prefix === 'male' ? 'MaleReal' : 'FemaleReal'}Btn`);
+        const resetFigure = document.getElementById(`reset${prefix === 'male' ? 'MaleFigure' : 'FemaleFigure'}Btn`);
+        if (replaceReal) replaceReal.onclick = () => replaceWithLocalFile(realImg);
+        if (replaceFigure) replaceFigure.onclick = () => replaceWithLocalFile(figureImg);
+        if (resetReal) resetReal.onclick = () => realImg.src = data.realImg;
+        if (resetFigure) resetFigure.onclick = () => figureImg.src = data.figureImg;
+    }
+
+    document.querySelectorAll('.gender-option').forEach(opt => {
+        opt.onclick = function() {
+            document.querySelectorAll('.gender-option').forEach(o => o.classList.remove('active'));
+            this.classList.add('active');
+            currentGender = this.dataset.gender;
+            document.getElementById('currentGenderText').innerText = currentGender === 'male' ? '帅哥版' : '美女版';
+            renderGenderCard();
+        };
+    });
+    renderGenderCard();
+
+    const scene1Img = document.getElementById('scene1Img');
+    const scene2Img = document.getElementById('scene2Img');
+    bindLocalReplace(scene1Img);
+    bindLocalReplace(scene2Img);
+    document.getElementById('replaceImg1Btn').onclick = () => replaceWithLocalFile(scene1Img);
+    document.getElementById('replaceImg2Btn').onclick = () => replaceWithLocalFile(scene2Img);
+    document.getElementById('resetImg1Btn').onclick = () => scene1Img.src = 'https://picsum.photos/id/26/500/300';
+    document.getElementById('resetImg2Btn').onclick = () => scene2Img.src = 'https://picsum.photos/id/96/500/300';
+
+    const defaultTexts = {
+        story1: '主角翻阅发光手办图鉴，光芒闪耀，眼神流露对幻想世界的渴望。',
+        sceneDesc1: '简约工作室，暖阳透窗，真人正面半身，真实纹理，自然光感。',
+        char1: '真人「主角」：休闲服装，正面自然神态，真实皮肤质感。',
+        camTrans1: '中景→推进至面部特写。转场：魔法粒子消散，白光溶解至卡通世界。',
+        story2: '主角化为Q版手办「灵境使者」，身穿奇幻星辰礼服，在魔法城堡前华丽亮相。',
+        sceneDesc2: '梦幻糖果小镇+魔法城堡，色彩饱和，卡通渲染风格。',
+        char2: 'Q版手办头身比1:2.8，保留真人神韵，奇幻星辰礼服+披风，与真人服装完全不同。',
+        camTrans2: '低机位仰拍→360°环绕展示服装→正面特写定格。'
+    };
+    function resetAll() {
+        Object.keys(defaultTexts).forEach(id => { const el = document.getElementById(id); if(el) el.innerText = defaultTexts[id]; });
+        scene1Img.src = 'https://picsum.photos/id/26/500/300';
+        scene2Img.src = 'https://picsum.photos/id/96/500/300';
+        document.getElementById('totalTimeInput').value = '15';
+        currentGender = 'male';
+        document.querySelector('[data-gender="male"]').classList.add('active');
+        document.querySelector('[data-gender="female"]').classList.remove('active');
+        document.getElementById('currentGenderText').innerText = '帅哥版';
+        renderGenderCard();
+    }
+    document.getElementById('resetAllBtn').onclick = () => { if(confirm('重置所有内容？')) resetAll(); };
+
+    function saveVersion() {
+        const clone = document.querySelector('.master-container').cloneNode(true);
+        clone.querySelectorAll('script').forEach(s => s.remove());
+        const style = document.querySelector('style').innerHTML;
+        const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>真人转3D手办规范表</title><style>${style}</style></head><body>${clone.outerHTML}</body></html>`;
+        const blob = new Blob([html], {type: 'text/html'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = '真人转3D手办_规范表.html';
+        a.click();
+        URL.revokeObjectURL(a.href);
+        const toast = document.createElement('div');
+        toast.className = 'toast-message';
+        toast.innerText = '✅ 已保存！将此文件拖拽到 https://app.netlify.com/drop 即可获得公网链接';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+    document.getElementById('saveVersionBtn').onclick = saveVersion;
+    document.getElementById('exportHtmlBtn').onclick = saveVersion;
+</script>
+</body>
+</html>
